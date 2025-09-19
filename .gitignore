@@ -1,3 +1,6 @@
 .venv/
-# But keep subdirectories
+# Ignore everything inside data/
+data/*
+
+# But keep all subdirectories
 !data/*/
