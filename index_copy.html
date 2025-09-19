@@ -1,0 +1,387 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Frameworks and Tools</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+  <style>
+    /* Smooth transitions for text and list items */
+    .reveal section h1, 
+    .reveal section h2, 
+    .reveal section p, 
+    .reveal section ul, 
+    .reveal section li {
+      transition: all 0.6s ease-in-out;
+    }
+  
+    /* Slide padding and scroll */
+    .reveal section {
+      padding: 20px;           /* add spacing around content */
+      overflow-y: auto;        /* allow vertical scroll if content exceeds slide height */
+      box-sizing: border-box;  /* include padding in height calculation */
+    }
+  
+    /* Ensure lists have some spacing */
+    ul {
+      margin-top: 20px;
+      padding-left: 20px;
+    }
+  
+    /* Make images scale to fit the slide width */
+    .reveal img {
+      max-width: 100%;         /* never exceed slide width */
+      height: auto;            /* maintain aspect ratio */
+      display: block;
+      margin: 0 auto 20px;     /* center image and add bottom margin */
+    }
+
+    /* Placeholder styling for missing images */
+    .image-placeholder {
+      width: 800px;
+      height: 400px;
+      background: linear-gradient(45deg, #333, #666);
+      border: 2px dashed #999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px auto;
+      color: #ccc;
+      font-size: 18px;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    .small-placeholder {
+      width: 400px;
+      height: 250px;
+      font-size: 14px;
+    }
+  </style>
+  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Slide 1: Title Slide -->
+      <section data-transition="fade">
+        <h1 class="fragment fade-in">Frameworks and Tools</h1>
+        <p class="fragment fade-in" style="font-size: 1.2em; margin-top: 20px;">
+          Exploring essential frameworks and tools for modern projects
+        </p>
+      </section>
+
+      <!-- Slide 2: Define a Framework -->
+      <section data-transition="slide">
+        <h2 class="fragment fade-in">What is a Framework?</h2>
+        <p class="fragment fade-in">
+          A <strong>framework</strong> is a structured approach or set of guidelines that helps organize and streamline the process of solving problems or building projects.
+        </p>
+        <ul class="fragment fade-in">
+          <li>Provides reusable components and best practices</li>
+          <li>Reduces repetitive work</li>
+          <li>Ensures consistency across projects</li>
+        </ul>
+      </section>
+
+      <!-- Slide 3: Code Structure -->
+      <section data-transition="fade">
+        <h2 class="fragment fade-in">Code Structure</h2>
+        <p class="fragment fade-in">
+          Overview of how the project is organized. The code will be shown live on screen.
+        </p>
+      </section>
+
+<!-- Slide 4: 5-Step Data Story Framework -->
+<section data-transition="slide">
+    <h2 class="fragment fade-in">5-Step Data Story Framework</h2>
+    <p class="fragment fade-in">
+      A simple framework to structure data-driven stories:
+    </p>
+    <ul class="fragment fade-in">
+      <li><strong>Context:</strong> Set the stage and explain the background.</li>
+      <li><strong>Data:</strong> Present the data that supports your story.</li>
+      <li><strong>Insight:</strong> Highlight key findings or patterns.</li>
+      <li><strong>Narrative:</strong> Craft a compelling story around the insights.</li>
+      <li><strong>Action:</strong> Suggest concrete next steps or recommendations.</li>
+    </ul>
+  </section>
+
+  <!-- Slide 5: Step 1 - Context -->
+<section data-transition="fade">
+    <h2 class="fragment fade-in">Step 1: Context</h2>
+    <p class="fragment fade-in">
+      Set the stage for your data story. Explain what is happening and why it matters.
+    </p>
+    <ul class="fragment fade-in">
+      <li>Bus speeds in NYC affect commute times, reliability, and rider satisfaction.</li>
+      <li>City planners and transit agencies monitor speeds to improve service quality.</li>
+      <li>Context: Understanding which routes slowed down can inform operational decisions.</li>
+    </ul>
+  </section>
+  
+  <!-- Slide 6: Step 2 - Data -->
+  <section data-transition="fade">
+    <h2 class="fragment fade-in">Step 2: Data</h2>
+    <p class="fragment fade-in">
+      Present the relevant data that supports the story.
+    </p>
+    <ul class="fragment fade-in">
+      <li>Daily average speed per bus route from 2023–2025.</li>
+      <li>Data broken down by hour, day of week, and borough.</li>
+      <li>Sources: MTA open data, traffic sensors, historical travel times.</li>
+    </ul>
+  </section>
+  
+  <!-- Slide 7: Step 3 - Insight -->
+  <section data-transition="fade">
+    <h2 class="fragment fade-in">Step 3: Insight</h2>
+    <p class="fragment fade-in">
+      Highlight the key findings or patterns in the data.
+    </p>
+    <ul class="fragment fade-in">
+      <li>Certain routes in Manhattan and Brooklyn have slowed down significantly in 2025.</li>
+      <li>Peak hours experienced larger slowdowns than off-peak hours.</li>
+      <li>Some routes in outer boroughs maintained consistent speeds.</li>
+    </ul>
+  </section>
+  
+  <!-- Slide 8: Step 4 - Narrative -->
+  <section data-transition="fade">
+    <h2 class="fragment fade-in">Step 4: Narrative</h2>
+    <p class="fragment fade-in">
+      Craft a compelling story around the insights.
+    </p>
+    <ul class="fragment fade-in">
+      <li>Slowdowns on key routes highlight potential traffic bottlenecks or operational challenges.</li>
+      <li>Commuters in certain areas are disproportionately affected during peak times.</li>
+      <li>Sharing this story can guide targeted improvements and policy decisions.</li>
+    </ul>
+  </section>
+  
+  <!-- Slide 9: Step 5 - Action -->
+  <section data-transition="fade">
+    <h2 class="fragment fade-in">Step 5: Action</h2>
+    <p class="fragment fade-in">
+      Suggest concrete next steps or recommendations based on your story.
+    </p>
+    <ul class="fragment fade-in">
+      <li>Investigate causes of slowdowns on impacted routes (traffic, construction, congestion).</li>
+      <li>Adjust bus schedules or add express services to maintain reliability.</li>
+      <li>Monitor speed trends over time to measure effectiveness of interventions.</li>
+    </ul>
+  </section>
+
+  <!-- Slide 6b: Data Workflow -->
+<section data-transition="fade">
+    <h2 class="fragment fade-in">Data Workflow: Iterative Process</h2>
+    <p class="fragment fade-in">
+      A robust data workflow is key to uncovering insights and building truth into our data story. It is an iterative process:
+    </p>
+    <ul class="fragment fade-in">
+      <li>Ask interesting questions</li>
+      <li>Get the data</li>
+      <li>Explore the data</li>
+      <li>Model the data</li>
+      <li>Visualize the data</li>
+    </ul>
+    <p class="fragment fade-in" style="margin-top: 20px;">
+      Each step informs the next, and repeated iteration ensures accuracy, context, and meaningful insights.
+    </p>
+    <!-- Placeholder for workflow image -->
+    <div class="image-placeholder fragment fade-in">
+      <div>
+        <strong>Data Story Workflow</strong><br>
+        [Image: data_story_workflow.png]<br>
+        <em>Diagram showing iterative process:<br>
+        Question → Data → Explore → Model → Visualize → Question</em>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Slide 10: Storytelling Lenses & Ethical Framing -->
+<section data-transition="convex">
+    <h2 class="fragment fade-in">Storytelling Lenses & Ethical Framing</h2>
+    <p class="fragment fade-in">
+      When telling data-driven stories, the perspective or "lens" you choose can shape interpretation. Make sure your story is supported by the data and highlights meaningful impacts.
+    </p>
+    <ul class="fragment fade-in">
+      <li><strong>Working-Class Lens:</strong> Focus on how bus speed changes affect daily commuters, access to jobs, and quality of life.</li>
+      <li><strong>Operational Lens:</strong> Examine the MTA's internal challenges, resource allocation, and scheduling strategies.</li>
+      <li><strong>Policy Lens:</strong> Highlight implications for city planning, traffic management, and transit equity.</li>
+      <li><strong>Ethical Storytelling:</strong> Always let the data drive your story. Avoid exaggeration; be transparent about limitations and uncertainty.</li>
+    </ul>
+    <p class="fragment fade-in">
+      Applying multiple lenses can make your story richer and more relevant to different audiences.
+    </p>
+  </section>
+
+  <!-- Slide 11: Storytelling Frameworks -->
+<section data-transition="slide">
+    <h2 class="fragment fade-in">Frameworks for Telling Stories</h2>
+    <p class="fragment fade-in">
+      There are multiple storytelling frameworks that help structure narratives. While their approaches differ, the underlying principles remain consistent.
+    </p>
+    <ul class="fragment fade-in">
+      <li><strong>AND, BUT, THEREFORE:</strong> A simple framework for causal storytelling—show the situation, the challenge, and the resolution.</li>
+      <li><strong>Pyramid Principle:</strong> Start with the key conclusion, then support it with logically structured arguments and evidence.</li>
+      <li><strong>Subsets & Variations:</strong> Many frameworks exist (e.g., 5-step data story, STAR method), but they all emphasize clear context, insight, and action.</li>
+    </ul>
+    <p class="fragment fade-in">
+      <strong>Keys that remain the same across frameworks:</strong>
+    </p>
+    <ul class="fragment fade-in">
+      <li>Context / Situation: Set the stage</li>
+      <li>Insight / Complication: Highlight key findings or challenges</li>
+      <li>Narrative / Resolution: Craft a coherent story</li>
+      <li>Action / Recommendation: Suggest next steps</li>
+    </ul>
+  </section>
+
+  <!-- Slide 14: Story Beats - BUT and THEREFORE (ACE Example) -->
+<section data-transition="convex">
+    <h2 class="fragment fade-in">Creating Tension in Stories</h2>
+    <p class="fragment fade-in">
+      Good stories don't just list events ("AND, AND, AND"). They create tension and keep the audience engaged.
+    </p>
+    <ul class="fragment fade-in">
+      <li><strong>BUT:</strong> Introduce a complication or challenge that interrupts expectations.</li>
+      <li><strong>THEREFORE:</strong> Show the consequence or action that follows from that challenge.</li>
+    </ul>
+    <p class="fragment fade-in" style="margin-top: 20px;">
+      Example (ACE Program & Bus Speeds):
+    </p>
+    <ul class="fragment fade-in">
+      <li>The ACE program improved certain routes' bus speeds, <strong>BUT</strong> some routes still experienced delays during peak hours.</li>
+      <li><strong>THEREFORE</strong>, the MTA adjusted schedules, monitored wait times, and optimized stop performance to maintain overall reliability.</li>
+    </ul>
+    <p class="fragment fade-in" style="margin-top: 20px;">
+      Using this structure helps your story feel dynamic, logical, and engaging—highlighting challenges and the resulting actions.
+    </p>
+  </section>
+  
+
+  <!-- Slide 12: Importance of Domain Knowledge -->
+<section data-transition="fade">
+    <h2 class="fragment fade-in">The Importance of Domain Knowledge</h2>
+    <p class="fragment fade-in">
+      Domain knowledge is understanding the context, nuances, and real-world systems behind your data. It helps you interpret patterns accurately and tell meaningful stories.
+    </p>
+    <ul class="fragment fade-in">
+      <li>Allows you to identify which trends are significant versus noise.</li>
+      <li>Helps contextualize findings for specific audiences, such as transit planners or commuters.</li>
+      <li>Ensures your story is realistic and actionable, grounded in the system you're analyzing.</li>
+      <li>Example: Knowing how NYC buses are scheduled, traffic patterns, and borough characteristics can explain why certain routes slow down more than others.</li>
+    </ul>
+    <p class="fragment fade-in">
+      Without domain knowledge, even accurate data can be misinterpreted or fail to resonate with your audience.
+    </p>
+  </section>
+
+  <!-- Slide 13: Key Metrics & ACE Program -->
+<section data-transition="slide">
+    <h2 class="fragment fade-in">Key Metrics: The ACE Program</h2>
+    <p class="fragment fade-in">
+      Let's start with a question for the audience:
+    </p>
+    <ul class="fragment fade-in">
+      <li>What is the <strong>ACE program</strong>?</li>
+      <li>Do ACE violations only occur where there is a bus lane?</li>
+      <li>What is the purpose of the <strong>ACE program</strong>?</li>
+    </ul>
+    <p class="fragment fade-in" style="margin-top: 20px;">
+      In analyzing the program, we focus on these key metrics:
+    </p>
+    <ul class="fragment fade-in">
+      <li><strong>Average Speed of Bus:</strong> The mean speed of a bus along a route, measured in miles per hour.</li>
+      <li><strong>Wait Assessment:</strong> Time passengers wait at stops before boarding.</li>
+      <li><strong>Bus Stop Time:</strong> Duration a bus spends at each stop picking up and dropping off passengers.</li>
+      <li><strong>Additional Travel Time:</strong> Extra time incurred due to delays, traffic, or operational inefficiencies.</li>
+      <li><strong>Customer Journey Time Performance:</strong> Total time passengers experience from start to end of their trip, including walking, waiting, and riding.</li>
+    </ul>
+    <p class="fragment fade-in">
+      Understanding and defining these metrics helps us objectively evaluate the ACE program's effectiveness.
+    </p>
+  </section>
+
+  <!-- Slide 14: Feature Engineering & Custom Metrics -->
+<section data-transition="fade">
+    <h2 class="fragment fade-in">Feature Engineering & Custom Metrics</h2>
+    <p class="fragment fade-in">
+      Sometimes the standard metrics aren't enough. We can create new metrics to better capture performance and insights.
+    </p>
+    <ul class="fragment fade-in">
+      <li><strong>Violation Density:</strong> Use polygons to calculate the density of ACE violations along a route.</li>
+      <li><strong>% of Violations Not Exempt:</strong> Measure the proportion of violations that are enforceable.</li>
+      <li><strong>Bus/Car Speed Ratio:</strong> A custom metric to compare bus speeds to car speeds.
+        <br><em>Equation:</em> <strong>Bus/Car Speed Ratio = Average Bus Speed ÷ Average Car Speed</strong>
+      </li>
+    </ul>
+    <p class="fragment fade-in" style="margin-top: 20px;">
+      Initially, I couldn't find car speed data at the necessary granularity. Then I realized Google Maps provides historical car speed data, which allows me to approximate this ratio.
+    </p>
+    <!-- Placeholder for Google car speed image -->
+    <div class="image-placeholder fragment fade-in">
+      <div>
+        <strong>Google Maps Car Speed Data</strong><br>
+        [Image: google_carspeed.png]<br>
+        <em>Screenshot showing Google Maps<br>
+        historical traffic/speed data interface</em>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Slide 15: Working with Visualizations -->
+<section data-transition="slide">
+    <h2 class="fragment fade-in">Framework for Visualizations</h2>
+    <p class="fragment fade-in">
+      Visualizations should clearly communicate your insights. A simple framework helps:
+    </p>
+    <ul class="fragment fade-in">
+      <li>Highlight the most important data points or trends.</li>
+      <li>Use color intentionally to guide attention.</li>
+      <li>Keep charts simple and uncluttered.</li>
+      <li>Label axes, units, and key categories clearly.</li>
+    </ul>
+    <p class="fragment fade-in" style="margin-top: 20px;">
+      Example: Two versions of the same visualization
+    </p>
+    <div class="fragment fade-in" style="display: flex; gap: 20px; margin-top: 20px; justify-content: center;">
+      <!-- Colored version placeholder -->
+      <div class="image-placeholder small-placeholder">
+        <div>
+          <strong>With Strategic Color</strong><br>
+          [violations_use.png]<br>
+          <em>Chart highlighting key<br>trends with color</em>
+        </div>
+      </div>
+      <!-- Without color placeholder -->
+      <div class="image-placeholder small-placeholder">
+        <div>
+          <strong>All Same Color</strong><br>
+          [violations_all_orange.png]<br>
+          <em>Same chart without<br>color emphasis</em>
+        </div>
+      </div>
+    </div>
+    <p class="fragment fade-in" style="margin-top: 20px;">
+      Notice how color guides your attention to the most important trends.
+    </p>
+  </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'slide',
+      transitionSpeed: 'fast',
+      backgroundTransition: 'fade',
+      slideNumber: true
+    });
+  </script>
+</body>
+</html>

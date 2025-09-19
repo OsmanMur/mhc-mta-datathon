@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Deck.gl + Google Maps + GeoJSON Gradient + Clock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/deck.gl@9.0.0/dist.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDku2ET0bzz5zPTAXNLUYMnjy9KZVd7B0o"></script>
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { width: 100%; height: 100vh; }
+
+    /* Clock styling */
+    #clock {
+      position: absolute;
+      top: 20px;
+      left: 1100px;
+      padding: 8px 12px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-family: sans-serif;
+      font-size: 20px;
+      border-radius: 6px;
+      z-index: 10;
+    }
+
+    #legend {
+        position: absolute;
+        top: 60px; /* below the clock */
+        left: 1100px;
+        width: 200px;
+        height: 20px;
+        background: linear-gradient(to right, red, yellow, green);
+        border-radius: 4px;
+        z-index: 10;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 4px;
+        color: white;
+        font-family: sans-serif;
+        font-size: 12px;
+      }
+      #legend span {
+        position: relative;
+        top: 24px; /* move label below the bar */
+      }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+<div id="clock">Hour: 0</div> <!-- Clock element -->
+<div id="legend"></div>
+
+<script>
+    const map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 40.85, lng: -73.83 },
+        zoom: 14,
+        styles: [
+          { elementType: "geometry", stylers: [{ color: "#212121" }] },
+          { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+          { elementType: "labels.text.fill", stylers: [{ color: "#757575" }] },
+          { elementType: "labels.text.stroke", stylers: [{ color: "#212121" }] },
+          { featureType: "administrative", elementType: "geometry", stylers: [{ color: "#757575" }] },
+          { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#757575" }] },
+          { featureType: "road", elementType: "geometry", stylers: [{ color: "#383838" }] },
+          { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#8a8a8a" }] },
+          { featureType: "road.arterial", elementType: "geometry", stylers: [{ color: "#404040" }] },
+          { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#555555" }] },
+          { featureType: "water", elementType: "geometry", stylers: [{ color: "#000000" }] }
+        ]
+    });
+
+    fetch("data/processed/bx12_speeds_shapes_directions_agg.geojson")
+      .then(response => response.json())
+      .then(geojson => {
+        const allData = geojson.features.map(f => ({
+          path: f.geometry.coordinates,
+          properties: f.properties
+        }));
+
+        // Compute min/max speeds for color gradient
+        const speeds = allData.map(d => d.properties.speed);
+        const minSpeed = Math.min(...speeds);
+        const maxSpeed = Math.max(...speeds);
+        const legendEl = document.getElementById("legend");
+        legendEl.innerHTML = `<span>${minSpeed.toFixed(1)} mph</span><span>${maxSpeed.toFixed(1)} mph</span>`;
+        const midSpeed = (minSpeed + maxSpeed) / 2;
+        legendEl.innerHTML = `<span>${minSpeed.toFixed(1)}</span><span>${midSpeed.toFixed(1)}</span><span>${maxSpeed.toFixed(1)}</span>`;
+
+
+
+        function lerp(a, b, t) { return a + (b - a) * t; }
+
+        function getColorForSpeed(speed) {
+          const t = (speed - minSpeed) / (maxSpeed - minSpeed);
+          let r, g, b = 0;
+          if (t < 0.5) { r = 255; g = Math.floor(lerp(0, 255, t*2)); }
+          else { r = Math.floor(lerp(255, 0, (t-0.5)*2)); g = 255; }
+          return [r, g, b, 200];
+        }
+
+        // Create the overlay initially with empty data
+// Create the overlay initially with empty data
+const overlay = new deck.GoogleMapsOverlay({
+  layers: [
+    new deck.PathLayer({
+      id: "bus-routes",
+      data: [],
+      getPath: d => d.path,
+      getColor: d => getColorForSpeed(d.properties.speed),
+      getWidth: 5,
+      widthUnits: "pixels",
+      pickable: true
+    })
+  ],
+  getTooltip: ({object}) => {
+    if (!object) return null;
+    const props = object.properties;
+    return {
+      text: `Route: ${props.route_id}\nSpeed: ${props.speed.toFixed(1)} mph\nHour: ${props.hour}`,
+      style: {
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
+        color: "white",
+        fontSize: "12px",
+        padding: "6px"
+      }
+    };
+  }
+});
+
+        overlay.setMap(map);
+
+        // Clock element
+        const clockEl = document.getElementById("clock");
+
+        // Animation
+        let currentHour = 0;
+        function animate() {
+          const filteredData = allData.filter(d => d.properties.hour === currentHour);
+          overlay.setProps({
+            layers: [
+              new deck.PathLayer({
+                id: "bus-routes",
+                data: filteredData,
+                getPath: d => d.path,
+                getColor: d => getColorForSpeed(d.properties.speed),
+                getWidth: 5,
+                widthUnits: "pixels",
+                pickable: true
+              })
+            ]
+          });
+
+          // Update the clock
+          clockEl.textContent = `Hour: ${currentHour}:00`;
+
+          currentHour = (currentHour + 1) % 24; // loop 0-23
+          setTimeout(animate, 300); // change hour every 5 seconds
+        }
+
+        animate();
+      })
+      .catch(err => console.error("Error loading JSON:", err));
+</script>
+</body>
+</html>
