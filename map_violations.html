@@ -53,7 +53,7 @@
   });
 
   // Load GeoJSON
-  fetch("data/raw/segment_speed_deck.json")
+  fetch("data/processed/violations.geojson")
     .then(res => res.json())
     .then(geojson => {
       const points = geojson.features.map(f => ({

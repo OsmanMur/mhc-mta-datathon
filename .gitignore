@@ -1,6 +1,10 @@
 .venv/
-# Ignore everything inside data/
-data/*
 
-# But keep all subdirectories
-!data/*/
+# Ignore everything inside data/
+data/**
+
+# But keep all subdirectories (only the dirs themselves)
+!data/**/
+
+# Optionally: allow .gitkeep files so dirs exist in repo
+!data/**/.gitkeep

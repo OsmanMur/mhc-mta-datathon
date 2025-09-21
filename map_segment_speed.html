@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BX Bus Routes Speed Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/deck.gl@9.0.0/dist.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOURGOOGLEKEY"></script>
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { width: 100%; height: 100vh; }
+    #legend {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 200px;
+      height: 20px;
+      border-radius: 4px;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      font-family: sans-serif;
+      font-size: 12px;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+<div id="legend"></div>
+
+<script>
+// Init Google Map
+const map = new google.maps.Map(document.getElementById("map"), {
+  center: { lat: 40.85, lng: -73.9 },
+  zoom: 12,
+  styles: [
+    { elementType: "geometry", stylers: [{ color: "#212121" }] },
+    { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+    { elementType: "labels.text.fill", stylers: [{ color: "#757575" }] },
+    { elementType: "labels.text.stroke", stylers: [{ color: "#212121" }] },
+    { featureType: "road", elementType: "geometry", stylers: [{ color: "#383838" }] },
+    { featureType: "water", elementType: "geometry", stylers: [{ color: "#000000" }] }
+  ]
+});
+
+// Load your segment speed GeoJSON
+fetch("data/raw/bx12_speeds_shapes_directions_agg_1.geojson")
+  .then(r => r.json())
+  .then(data => {
+
+    // Compute min/max speed for color gradient
+    const speeds = data.features.map(f => f.properties.speed);
+    const minSpeed = Math.min(...speeds);
+    const maxSpeed = Math.max(...speeds);
+    const midSpeed = (minSpeed + maxSpeed)/2;
+
+    // Show legend
+    const legend = document.getElementById("legend");
+    legend.innerHTML = `<span>${minSpeed.toFixed(1)}</span><span>${midSpeed.toFixed(1)}</span><span>${maxSpeed.toFixed(1)}</span>`;
+
+    // Color function (red=slow, yellow=medium, green=fast)
+    function getColor(speed) {
+      const t = (speed - minSpeed) / (maxSpeed - minSpeed);
+      let r, g, b = 0;
+      if(t < 0.5) { r = 255; g = Math.floor(255*t*2); }
+      else { r = Math.floor(255*(1-(t-0.5)*2)); g = 255; }
+      return [r, g, b, 200];
+    }
+
+    const overlay = new deck.GoogleMapsOverlay({
+      layers: [
+        new deck.GeoJsonLayer({
+          id: "bx-speed",
+          data: data,
+          stroked: true,
+          filled: false,
+          getLineColor: f => getColor(f.properties.speed),
+          lineWidthMinPixels: 4,
+          pickable: true,
+          getTooltip: ({object}) => object ?
+            `Route: ${object.properties.route_id}\nSegment: ${object.properties.segment_number}\nSpeed: ${object.properties.speed.toFixed(1)} mph\nTrips: ${object.properties.trips}` : null
+        })
+      ]
+    });
+
+    overlay.setMap(map);
+  })
+  .catch(console.error);
+
+</script>
+</body>
+</html>
