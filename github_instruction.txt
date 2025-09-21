@@ -1,0 +1,144 @@
+===========================================================
+           DATATHON PROJECT: GITHUB & JUPYTER GUIDE
+===========================================================
+
+This guide explains how to get started with the Datathon project:
+- Clone the repository
+- Make it your own GitHub repo
+- Set up a Python virtual environment
+- Stage, commit, and push changes
+- Use branches
+- Connect and use Jupyter Lab
+
+-----------------------------------------------------------
+1. CLONE THE REPOSITORY
+
+Clone the project to your local machine:
+
+git clone https://github.com/djbrown227/datathon_project.git .
+
+(The '.' ensures the repository is cloned into your current directory)
+
+-----------------------------------------------------------
+2. CREATE A VIRTUAL ENVIRONMENT
+
+Set up a Python virtual environment to manage dependencies:
+
+python3 -m venv venv
+source venv/bin/activate      # Mac/Linux
+venv\Scripts\activate         # Windows
+
+-----------------------------------------------------------
+3. CONNECT TO YOUR OWN GITHUB REPOSITORY
+
+Check current remotes:
+
+git remote -v
+
+Update to your own repository so you can push changes:
+
+git remote set-url origin https://github.com/YOUR_USERNAME/datathon_project.git
+
+-----------------------------------------------------------
+4. STAGE, COMMIT, AND PUSH CHANGES
+
+Stage all changes:
+
+git add .
+
+Commit your changes:
+
+git commit -m "Describe your changes here"
+
+Push to main branch:
+
+git push origin main
+
+Check status and remotes:
+
+git status
+git remote -v
+
+-----------------------------------------------------------
+5. WORKING WITH BRANCHES
+
+Switch to main branch and pull latest changes:
+
+git checkout main
+git pull origin main
+
+Create a new feature branch:
+
+git checkout -b feature/my_changes
+
+Make your changes:
+* Edit files in VS Code as needed
+* Save your changes
+
+Stage and commit:
+
+git add .
+git commit -m "Add description of changes"
+
+Push your feature branch:
+
+git push -u origin feature/my_changes
+
+-----------------------------------------------------------
+6. SETTING UP JUPYTER LAB
+
+Install and connect a kernel for your virtual environment:
+
+pip install ipykernel
+python -m ipykernel install --user --name=datathon_env --display-name "Python (datathon_env)"
+
+Launch Jupyter Lab:
+
+jupyter lab
+
+Open notebooks and start analyzing data in your project environment.
+
+-----------------------------------------------------------
+7. MERGING CHANGES
+
+Once your feature branch is ready:
+1. Push your branch (see above)
+2. Create a Pull Request (PR) on GitHub
+3. Review and merge into main branch
+
+===========================================================
+SUMMARY
+
+This workflow allows you to:
+- Safely clone and manage your own version of the project
+- Use virtual environments for reproducible Python setups
+- Make, track, and push changes using Git and branches
+- Connect Jupyter Lab to the project for interactive analysis
+
+Following this guide keeps your work organized and reproducible.
+===========================================================
+
+===========================================================
+                     GIT + JUPYTER WORKFLOW
+===========================================================
+
+graph TD
+    A[Clone Repository] --> B[Create Virtual Environment]
+    B --> C[Activate Environment]
+    C --> D[Connect to Your GitHub Repo]
+    D --> E[Create Feature Branch]
+    E --> F[Make Changes in VS Code / Jupyter Lab]
+    F --> G[Stage Changes (git add)]
+    G --> H[Commit Changes (git commit)]
+    H --> I[Push Branch (git push)]
+    I --> J[Create Pull Request on GitHub]
+    J --> K[Review & Merge into Main]
+    F --> L[Launch Jupyter Lab]
+    L --> F
+    K --> M[Sync Main Branch Locally (git pull)]
+
+%% Notes
+%% This diagram shows the main workflow from cloning the repo to merging changes,
+%% including working interactively in Jupyter Lab.
+===========================================================
+
