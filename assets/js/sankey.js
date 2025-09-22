@@ -8,7 +8,7 @@ async function drawBusSankey() {
   const nodePadding = 12;
   const nodeFill = "#69b3a2";
   const nodeStroke = "#000";
-  const fontSize = 12;
+  const fontSize = 16;
   const fontFamily = "Inter, system-ui, sans-serif";
   const fontColor = "#000";
 
